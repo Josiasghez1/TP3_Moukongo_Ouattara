@@ -19,7 +19,9 @@
 <body>
     <header>
         <div class="container d-flex justify-content-between">
-            <h1>Logo</h1>
+            <a href="index.html">
+                <img src="images/logo.png" alt="logo du site web">
+            </a>
             <div class="d-flex justify-content-between">
                 <div id="session">Bienvenu PSEUDO</div>
                 <div id="controles">Fonctionnalité suprise 
@@ -43,11 +45,41 @@
     <main class="container" id="main">
         <div id="principal">
             <div class="row">
-                <form id="formulaire" action="#" method="post" novalidate>
-                    <h2>Formulaire...</h2>
+                <form id="formulaire" class="col" action="#" method="post" novalidate aria-label="formulaire de connexion" >
+                    <h1>Formulaire</h1>
                     <div class="mb-3">
-                   
-                        <!-- Champs du formulaire .. -->
+                        <div class="mb-3">
+                            <label for="txt-prenom" class="form-label">Prénom</label>
+                            <input class="form-control" type="text" id="txt-prenom" name="txt-prenom" >
+                            <span class="text-danger" id="msg_erreurPrenom"></span>
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="txt-nom" class="form-label">Nom</label>
+                            <input class="form-control" type="text" id="txt-nom" name="txt-nom" >
+                            <span class="text-danger" id="msg_erreurNom"></span>
+                         </div>
+
+                          <div class="mb-3">
+                            <label for="email-newsletter" class="form-label">Courriel</label>
+                            <input class="form-control" type="text" id="email-newsletter" name="email-newsletter" >
+                            <span class="text-danger" id="msg_erreurCourriel"></span>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmationCourriel" class="form-label">Confirmation du courriel</label>
+                            <input class="form-control" type="text" id="confirmationCourriel" name="confirmationCourriel" >
+                            <span class="text-danger" id="msg_erreurConfirmationCourriel"></span>
+
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="pseudo" class="form-label">Pseudo</label>
+                            <input class="form-control" type="text" id="pseudo" name="pseudo" >
+                            <span class="text-danger" id="msg_erreurPseudo"></span>
+
+                        </div>
     
                         <div class="d-flex gap-1">
                             <!-- N'est pas un type SUBMIT pour éviter de devoir gérer un POST que nous n'avons pas besoin-->
@@ -57,6 +89,9 @@
                     </div>
                     
                 </form>
+                <div class="col">
+                    <img src="images/image-theme.jpg" alt="image du thème du site">
+                </div>
 
             </div>
 
