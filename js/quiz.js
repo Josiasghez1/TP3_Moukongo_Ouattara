@@ -16,7 +16,12 @@ let donnees = [
             "Je ne sais pas"
         ],
         réponse: 0
+        
+
     },
+
+    
+
     {
         question: "HTML vient de :",
         réponses: [
@@ -40,7 +45,7 @@ function init_quiz() {
 	// Vous remplacer son contenu par le contenu de votre quiz, vos questions et réponses, etc.
 	console.log("init_quiz() : initialisation du quiz");
 	console.log("donnees : ", donnees);
-    alert("Le quiz démarre !");
+    // alert("Le quiz démarre !");
 	
 
 }
