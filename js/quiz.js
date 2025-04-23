@@ -44,7 +44,7 @@ let donnees = [
         réponse: 2
     },
     {
-        question: " 4- Quel est le plus rapide sur terre ? ",
+        question: " 4- Quel est l'aminal le plus rapide sur terre ? ",
         réponses: [
             "Le guépard",
             "Le lion",
