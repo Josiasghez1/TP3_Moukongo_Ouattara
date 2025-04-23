@@ -48,6 +48,7 @@ function init_jeu_memoire() {
 	tableauDesCartes = genererCartes(_paramètres.nbPaires * 2);
 
 	console.log("tableauDesCartes : ", tableauDesCartes);
+	
 
 
 }
