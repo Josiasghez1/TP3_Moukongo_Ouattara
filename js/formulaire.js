@@ -94,7 +94,6 @@ function validerPseudo() {
 }
 
 
-
 /* FIN variables globales */ 
 // ##########################
 
