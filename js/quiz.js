@@ -9,11 +9,26 @@
 // Vous pouvez même modifier entièrement la structure de cette variable si vous le désirez
 let donnees = [
     {
-        question: "À quoi sert un aria-label?",
+        question: "1-Quel animal est connu pour changer de couleur pour se camoufler ? ",
         réponses: [
-            "Ajouter du contenu sur une balise pour aider les lecteurs d'écran",
-            "À rien",
+            "Le caméléon",
+            "Le serpent",
+            "Le lézard ",
+            "La grenouille",
             "Je ne sais pas"
+           
+        ],
+        réponse: 0
+       
+    },
+    {
+        question: "2-Comment s’appelle le petit du lion ?",
+        réponses: [
+            "Lionceau",
+            "Tigrelet",
+            "Léopardeau ",
+            "Je ne sais pas",
+            "Louveteau"
         ],
         réponse: 0
         
@@ -23,13 +38,98 @@ let donnees = [
     
 
     {
-        question: "HTML vient de :",
+        question: "3-Quel oiseau ne peut pas voler mais court très vite ?",
         réponses: [
-            "Hyper Typo Meta Lol",
-            "Hypertext markup language",
+            "Le perroquet",
+            "Le kiwi",
+            "L’autruche",
+            "Le pélican ",
             "Je ne sais pas"
+        ],   
+        réponse: 2
+    },
+    {
+        question: " 4- Quel est le plus rapide sur terre ? ",
+        réponses: [
+            "Le guépard",
+            "Le lion",
+            "Le cheval",
+            "L’antilope ",
+            "Je ne sais pas"
+            
+        ],
+        réponse: 0
+    },
+    {
+        question: "5- Quel animal est capable d’imiter la voix humaine ?",
+        réponses: [
+            "Le chat",
+            "Le perroquet ",
+            "Le singe ",
+            "L’oiseau colibri ",
+            "Je ne sais pas"
+             
         ],
         réponse: 1
+    },
+    {
+        question: "6- Quel animal est connu pour être un excellent grimpeur et très proche de l’humain ?",
+        réponses: [
+            "Le tigrel",
+            "La tortue",
+            "Le singe",
+            "Je ne sais pas"
+            
+        ],
+        réponse: 2
+    },
+    {
+        question: " 7- Lequel de ces animaux peut vivre le plus longtemps ?",
+        réponses: [
+            "Le chat",
+            "Le papillon",
+            "Le chien",
+            "La tortue ",
+            "Je ne sais pas"
+          
+        ],
+        réponse: 3
+    },
+    {
+        question: "8- Quel animal est surnommé : le meilleur ami de l’homme ?",
+        réponses: [
+            "Le chat",
+            "Le chien",
+            "Le singe",
+            "La poule",
+            "Je ne sais pas"
+            
+        ],
+        réponse: 1
+    },
+    {
+        question: "9- Quel animal peut parler, voler, et est souvent gardé en cage ?",
+        réponses: [
+            "Le perroquet",
+            "Le chat",
+            "La tortue",
+            "Le papillon",
+            "Je ne sais pas"
+            
+        ],
+        réponse: 0
+    },
+    {
+        question: " 10- Quel animal possède une carapace qui le protège des prédateurs ?",
+        réponses: [
+            "Les tatous",
+            "Le chat",
+            "La tortue ",
+            "Le papillon",
+            "Je ne sais pas"
+              
+        ],
+        réponse: 2
     }
 ];
 
