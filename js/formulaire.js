@@ -7,6 +7,8 @@
 function validerPrenom() {
     const prenom = document.getElementById("txt-prenom").value.trim();
     const msgErreur = document.getElementById("msg_erreurPrenom");
+    const nom = document.getElementById("txt-nom").value.trim();
+
     msgErreur.textContent = "";
 
     if (prenom === "") {
@@ -14,7 +16,8 @@ function validerPrenom() {
         return false;
     }
 
-    if (prenom === document.getElementById("txt-nom").value.trim()) {
+    if (prenom === nom)
+     {
         msgErreur.textContent = "Le prénom doit être différent du nom";
         return false;
     }
@@ -25,6 +28,7 @@ function validerPrenom() {
 function validerNom() {
     const nom = document.getElementById("txt-nom").value.trim();
     const msgErreur = document.getElementById("msg_erreurNom");
+    const prenom = document.getElementById("txt-prenom").value.trim();
     msgErreur.textContent = "";
 
     if (nom === "") {
@@ -32,7 +36,7 @@ function validerNom() {
         return false;
     }
 
-    if (nom === document.getElementById("txt-prenom").value.trim()) {
+    if (nom === prenom) {
         msgErreur.textContent = "Le nom doit être différent du prénom";
         return false;
     }
@@ -93,41 +97,6 @@ function validerPseudo() {
     return true;
 }
 
-
-/* FIN variables globales */ 
-// ##########################
-
-function afficherChoixJeu()
-{
-	// Vide le <main> et affiche le choix du jeu
-	// Il faut prévoir une image, un titre et une description pour chaque jeu
-	// Il faut savoir quel jeu a été choisi par l'utilisateur, et ensuite appeler soit fonction init_jeu_memoire() ou init_quiz()
-	// Ces fonctions sont le point d'entrée pour le jeu choisi par l'utilisateur et se trouvent respectivement 
-	// dans les fichiers js/jeu_memoire.js et js/quiz.js
-	// À la fin de cette fonction, on doit vider le <main> et afficher le jeu choisi par l'utilisateur
-
-	const main = document.getElementById("main");
-    main.innerHTML = `
-        <h2>Choisis ton jeu</h2>
-        <div class="row text-center">
-            <div class="col">
-                <h3>Jeu de mémoire</h3>
-                <img src="images/jeuMemoire.png" alt="Jeu de mémoire" style="max-width: 100%;">
-                <p>Teste ta mémoire en retrouvant les paires !</p>
-                <button class="btn btn-success" onclick="init_jeu_memoire()">Lancer</button>
-            </div>
-            <div class="col">
-                <h3>Quiz</h3>
-                <img src="images/quiz.png" alt="Quiz" style="max-width: 100%;">
-                <p>Réponds aux questions pour tester tes connaissances !</p>
-                <button class="btn btn-primary" onclick="init_quiz()">Lancer</button>
-            </div>
-        </div>
-    `;
-
-	
-}
-
 function validerFormulaire() {
     const validePrenom = validerPrenom();
     const valideNom = validerNom();
@@ -141,6 +110,76 @@ function validerFormulaire() {
     } else {
         console.log("Le formulaire contient des erreurs.");
     }
+}
+
+
+/* FIN variables globales */ 
+// ##########################
+
+
+function afficherChoixJeu() {
+    const main = document.getElementById("main");
+    main.textContent = ""; // Vider le <main> proprement
+
+    // Créer le H2
+    const h2 = document.createElement("h2");
+    h2.textContent = "Choisis ton jeu";
+    main.appendChild(h2);
+
+    // Créer la DIV row
+    const divRow = document.createElement("div");
+    divRow.classList.add("row", "text-center");
+
+    // ----------- Colonne Jeu de mémoire ------------
+    const divColMemoire = document.createElement("div");
+    divColMemoire.classList.add("col");
+
+    const h3Memoire = document.createElement("h3");
+    h3Memoire.textContent = "Jeu de mémoire";
+
+    const imgMemoire = document.createElement("img");
+    imgMemoire.src = "images/jeuMemoire.png";
+    imgMemoire.alt = "Jeu de mémoire";
+    imgMemoire.style.maxWidth = "100%";
+    imgMemoire.style.cursor = "pointer"; // rend la souris en main
+    imgMemoire.addEventListener("click", init_jeu_memoire); // clique image
+
+    const pMemoire = document.createElement("p");
+    pMemoire.textContent = "Teste ta mémoire en retrouvant les paires !";
+
+    // Ajouter les éléments du jeu de mémoire à la colonne
+    divColMemoire.appendChild(h3Memoire);
+    divColMemoire.appendChild(imgMemoire);
+    divColMemoire.appendChild(pMemoire);
+
+    // ----------- Colonne Quiz ------------
+    const divColQuiz = document.createElement("div");
+    divColQuiz.classList.add("col");
+
+    const h3Quiz = document.createElement("h3");
+    h3Quiz.textContent = "Quiz";
+
+    const imgQuiz = document.createElement("img");
+    imgQuiz.src = "images/quiz.png";
+    imgQuiz.alt = "Quiz";
+    imgQuiz.style.maxWidth = "100%";
+    imgQuiz.style.cursor = "pointer"; // rend la souris en main
+    imgQuiz.addEventListener("click", init_quiz); // clique image
+
+    const pQuiz = document.createElement("p");
+    pQuiz.textContent = "Réponds aux questions pour tester tes connaissances !";
+
+    // Ajouter les éléments du quiz à la colonne
+    divColQuiz.appendChild(h3Quiz);
+    divColQuiz.appendChild(imgQuiz);
+    divColQuiz.appendChild(pQuiz);
+
+    // ----------- Ajouter les deux colonnes à la rangée ------------
+    divRow.appendChild(divColMemoire);
+    divRow.appendChild(divColQuiz);
+
+    // ----------- Ajouter toute la rangée dans <main> ------------
+    main.appendChild(divRow);
 }
 
 function gererBtnInvite()
