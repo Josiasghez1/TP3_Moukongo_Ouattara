@@ -9,7 +9,7 @@
 // Vous pouvez même modifier entièrement la structure de cette variable si vous le désirez
 let donnees = [
     {
-        question: "1-Quel animal est connu pour changer de couleur pour se camoufler ? ",
+        question: "Quel animal est connu pour changer de couleur pour se camoufler ? ",
         réponses: [
             "Le caméléon",
             "Le serpent",
@@ -22,7 +22,7 @@ let donnees = [
        
     },
     {
-        question: "2-Comment s’appelle le petit du lion ?",
+        question: "Comment s’appelle le petit du lion ?",
         réponses: [
             "Lionceau",
             "Tigrelet",
@@ -38,7 +38,7 @@ let donnees = [
     
 
     {
-        question: "3-Quel oiseau ne peut pas voler mais court très vite ?",
+        question: "Quel oiseau ne peut pas voler mais court très vite ?",
         réponses: [
             "Le perroquet",
             "Le kiwi",
@@ -49,7 +49,7 @@ let donnees = [
         réponse: 2
     },
     {
-        question: " 4- Quel est le plus rapide sur terre ? ",
+        question: " Quel est l'aminal le plus rapide sur terre ? ",
         réponses: [
             "Le guépard",
             "Le lion",
@@ -61,7 +61,7 @@ let donnees = [
         réponse: 0
     },
     {
-        question: "5- Quel animal est capable d’imiter la voix humaine ?",
+        question: "Quel animal est capable d’imiter la voix humaine ?",
         réponses: [
             "Le chat",
             "Le perroquet ",
@@ -73,7 +73,7 @@ let donnees = [
         réponse: 1
     },
     {
-        question: "6- Quel animal est connu pour être un excellent grimpeur et très proche de l’humain ?",
+        question: "Quel animal est connu pour être un excellent grimpeur et très proche de l’humain ?",
         réponses: [
             "Le tigrel",
             "La tortue",
@@ -84,7 +84,7 @@ let donnees = [
         réponse: 2
     },
     {
-        question: " 7- Lequel de ces animaux peut vivre le plus longtemps ?",
+        question: "Lequel de ces animaux peut vivre le plus longtemps ?",
         réponses: [
             "Le chat",
             "Le papillon",
@@ -96,7 +96,7 @@ let donnees = [
         réponse: 3
     },
     {
-        question: "8- Quel animal est surnommé : le meilleur ami de l’homme ?",
+        question: "Quel animal est surnommé : le meilleur ami de l’homme ?",
         réponses: [
             "Le chat",
             "Le chien",
@@ -108,7 +108,7 @@ let donnees = [
         réponse: 1
     },
     {
-        question: "9- Quel animal peut parler, voler, et est souvent gardé en cage ?",
+        question: "Quel animal peut parler, voler, et est souvent gardé en cage ?",
         réponses: [
             "Le perroquet",
             "Le chat",
@@ -120,7 +120,7 @@ let donnees = [
         réponse: 0
     },
     {
-        question: " 10- Quel animal possède une carapace qui le protège des prédateurs ?",
+        question: "Quel animal possède une carapace qui le protège des prédateurs ?",
         réponses: [
             "Les tatous",
             "Le chat",
@@ -133,19 +133,133 @@ let donnees = [
     }
 ];
 
-
+ let score =0;
+ let indexQuestion = 0;
+ 
 
 //* FIN variables globales */	
 // // ##########################
+
+function afficherQuestion(){
+    let main= document.getElementById("main");
+    main.textContent ="";
+    if (indexQuestion>=donnees.length){
+        afficherResultat();
+        return;
+    }
+
+    let q = donnees[indexQuestion];
+    let titre = document.createElement("h2");
+   titre.textContent = `Question ${indexQuestion + 1}/${donnees.length}`;
+   titre.style.marginBottom = "20 px";
+   titre.style.fontWeight="bold";
+   main.appendChild(titre);
+
+   let p = document.createElement("p");
+   p.textContent = q.question;
+   p.style.marginBottom ="20px";
+   main.appendChild (p);
+   let ol = document.createElement("ol");
+ 
+   for (let i = 0; i<q.réponses.length;i++){
+    let li = document.createElement("li");
+    li.textContent =q.réponses[i];
+    ol.appendChild(li);
+
+   };
+   main.appendChild(ol);
+   let label = document.createElement("label");
+   label.textContent = "Réponse: ";
+   label.setAttribute ("for","champReponse");
+   main.appendChild(label);
+
+   let input = document.createElement("input");
+   input.type = "text";
+   input.style.width="50px";
+   input.style.margin ="10px";
+   input.id ="champReponse";
+   main.appendChild (input);
+
+ 
+   
+  let br = document.createElement("br");
+  main.appendChild(br);
+  
+   let bouton = document.createElement("button");
+   bouton.textContent ="suivant";
+   bouton.style.background ="#E48E36";
+   bouton.style.color ="#F7EED6";
+   bouton.style.marginTop ="10px";
+   bouton.style.marginBottom ="50px";
+   bouton.addEventListener("click",verifierReponse);
+   main.appendChild(bouton);
+   
+}
+function verifierReponse(){
+   
+    let champ = document.getElementById("champReponse");
+    let reponseUtilisateur = parseInt(champ.value) ;
+    if(champ.value=== "")
+        {
+            indexQuestion++;
+            afficherQuestion();
+            return;
+        }
+    if( isNaN(reponseUtilisateur) || reponseUtilisateur<1 || reponseUtilisateur>donnees[indexQuestion].réponses.length)
+        {
+            alert("Veuillez entrer une réponse valide !!!");
+            return;
+        }
+    
+     let bonneReponse = donnees[indexQuestion].réponse;
+         
+    if (reponseUtilisateur-1 ===bonneReponse){
+        console.log("Bonne réponse !");
+        score++;
+    }
+    else{
+        console.log("Mauvaise réponse !");
+    }
+    
+     indexQuestion++ ;
+     afficherQuestion();
+}
+
+
+
+
+
+function afficherResultat(){
+    let main= document.getElementById("main");
+    main.textContent = "";
+    let resultat = document.createElement("h2");
+    resultat.textContent = `Quiz terminé ! Ton score : ${score} / ${donnees.length}`;
+    main.appendChild(resultat);
+    let message = document.createElement("p");
+    if (score >= donnees.length / 2){
+        message.textcontent = "Félications 🎉 Tu as réussi le quiz !";}
+    else {
+        message.textContent ="Dommage Tu pourras réessayer.";
+    }
+    main.appendChild(message);
+    
+}
+//afficherQuestion();
+//afficherResultat();
 
 
 function init_quiz() {
 
 	// On doiter vider le <main> et on affiche le quiz, à partir de votre source de données "donnees", qui est une variable globale
+    let main= document.getElementById("main");
+    
+    main.textContent ="";
 	// Vous remplacer son contenu par le contenu de votre quiz, vos questions et réponses, etc.
-	console.log("init_quiz() : initialisation du quiz");
-	console.log("donnees : ", donnees);
+	//console.log("init_quiz() : initialisation du quiz");
+	//console.log("donnees : ", donnees);
     // alert("Le quiz démarre !");
+    afficherQuestion();
+    
 	
 
 }
