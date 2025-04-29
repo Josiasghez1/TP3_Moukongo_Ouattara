@@ -25,3 +25,86 @@ header, footer
     background-color: #f5e8d7;
 
 }
+
+ol {
+    padding-left: 20px;
+}
+
+button {
+    background-color: #E48E36;
+    border: none;
+    padding: 10px 20px;
+    color: #F7EED6;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn {
+    background-color: #E48E36;
+    color: #F7EED6;
+}
+
+.btn:hover {
+    background-color: #F9D778;
+}
+
+#zoneJeu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Les cartes s'adaptent */
+    gap: 15px; /* Espace entre les cartes */
+    padding: 20px;
+    justify-items: center; /* Centrer chaque carte */
+}
+
+/* Style pour le jeu de mémoire */
+
+#zoneJeu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    justify-items: center;
+}
+
+#zoneJeu img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+#zoneJeu img:hover {
+    transform: scale(1.05);
+}
+
+/* Style de la section des paramètres (optionnel pour rendre plus beau) */
+
+#parametres {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#parametres label, #parametres select, #parametres input, #parametres button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#parametres button {
+    background-color: #E48E36;
+    color: #F7EED6;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#parametres button:hover {
+    background-color: #F9D778;
+}
