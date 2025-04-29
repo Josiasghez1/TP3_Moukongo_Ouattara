@@ -232,20 +232,28 @@ function verifierReponse(){
 function afficherResultat(){
     let main= document.getElementById("main");
     main.textContent = "";
-    let resultat = document.createElement("h2");
-    resultat.textContent = `Quiz terminé ! Ton score : ${score} / ${donnees.length}`;
-    main.appendChild(resultat);
-    let message = document.createElement("p");
-    if (score >= donnees.length / 2){
-        message.textcontent = "Félications 🎉 Tu as réussi le quiz !";}
-    else {
-        message.textContent ="Dommage Tu pourras réessayer.";
+
+    let h2 = document.createElement("h2");
+    let pourcentage = Math.round((score / donnees.length) * 100);
+    h2.textContent = `Ton score : ${pourcentage}% (${score} / ${donnees.length})`;
+    main.appendChild(h2);
+
+    let img = document.createElement("img");
+    if (pourcentage >= 60) {
+        img.src = "images/valide.png";
+        img.alt = "Bravo !";
+    } else {
+        img.src = "images/invalide.png";
+        img.alt = "Dommage !";
     }
-    main.appendChild(message);
+    
+    img.style.maxWidth = "300px";
+    main.appendChild(img);
     
 }
-//afficherQuestion();
-//afficherResultat();
+
+
+
 
 
 function init_quiz() {
