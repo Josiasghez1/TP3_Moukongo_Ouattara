@@ -110,6 +110,12 @@ function afficherChoixJeu()
     const main = document.getElementById("main");
     main.textContent = ""; // Vider le <main> proprement
 
+    // const nav = document.createElement("nav");
+    // nav.textContent = "Formulaire";
+    // nav.style.background = "#F9D778";
+    // nav.style.color = "#F7EED6";
+    // main.appendChild(nav);
+
     // Créer le H2
     const h2 = document.createElement("h2");
     h2.textContent = "Choisis ton jeu";
