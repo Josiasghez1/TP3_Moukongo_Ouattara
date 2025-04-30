@@ -14,8 +14,7 @@ let donnees = [
             "Le caméléon",
             "Le serpent",
             "Le lézard ",
-            "La grenouille",
-            "Je ne sais pas"
+            "La grenouille"
            
         ],
         réponse: 0
@@ -27,7 +26,6 @@ let donnees = [
             "Lionceau",
             "Tigrelet",
             "Léopardeau ",
-            "Je ne sais pas",
             "Louveteau"
         ],
         réponse: 0
@@ -43,8 +41,7 @@ let donnees = [
             "Le perroquet",
             "Le kiwi",
             "L’autruche",
-            "Le pélican ",
-            "Je ne sais pas"
+            "Le pélican "
         ],   
         réponse: 2
     },
@@ -54,8 +51,7 @@ let donnees = [
             "Le guépard",
             "Le lion",
             "Le cheval",
-            "L’antilope ",
-            "Je ne sais pas"
+            "L’antilope "
             
         ],
         réponse: 0
@@ -66,8 +62,7 @@ let donnees = [
             "Le chat",
             "Le perroquet ",
             "Le singe ",
-            "L’oiseau colibri ",
-            "Je ne sais pas"
+            "L’oiseau colibri "
              
         ],
         réponse: 1
@@ -77,8 +72,7 @@ let donnees = [
         réponses: [
             "Le tigrel",
             "La tortue",
-            "Le singe",
-            "Je ne sais pas"
+            "Le singe"
             
         ],
         réponse: 2
@@ -89,8 +83,7 @@ let donnees = [
             "Le chat",
             "Le papillon",
             "Le chien",
-            "La tortue ",
-            "Je ne sais pas"
+            "La tortue "
           
         ],
         réponse: 3
@@ -101,8 +94,7 @@ let donnees = [
             "Le chat",
             "Le chien",
             "Le singe",
-            "La poule",
-            "Je ne sais pas"
+            "La poule"
             
         ],
         réponse: 1
@@ -113,8 +105,7 @@ let donnees = [
             "Le perroquet",
             "Le chat",
             "La tortue",
-            "Le papillon",
-            "Je ne sais pas"
+            "Le papillon"
             
         ],
         réponse: 0
@@ -125,8 +116,7 @@ let donnees = [
             "Les tatous",
             "Le chat",
             "La tortue ",
-            "Le papillon",
-            "Je ne sais pas"
+            "Le papillon"
               
         ],
         réponse: 2
