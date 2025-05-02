@@ -120,7 +120,8 @@ let donnees = [
               
         ],
         réponse: 2
-    }
+    },
+    
 ];
 
  let score =0;
@@ -133,6 +134,7 @@ let donnees = [
 function afficherQuestion(){
     let main= document.getElementById("main");
     main.textContent ="";
+
     if (indexQuestion>=donnees.length){
         afficherResultat();
         return;
