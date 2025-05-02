@@ -44,9 +44,13 @@ function debuterJeuMémoire() {
     nbErreurs = 0;
     carteRetournee = null;
     verrouillage = false;
+   
+
+    _parametres.difficulté = document.getElementById("diff").value;
 
     if (_parametres.difficulté === "Difficile") {
         _parametres.nbPaires = 10;
+        
         secondesRestantes = 40;
     } else {
         _parametres.nbPaires = 12;
