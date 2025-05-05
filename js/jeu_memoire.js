@@ -33,6 +33,7 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
 
 function debuterJeuMémoire() {
     const main = document.getElementById("main");
+    
 
     // Créer la zone du jeu
     const sectionJeu = document.createElement("section");
@@ -46,15 +47,16 @@ function debuterJeuMémoire() {
     verrouillage = false;
    
 
-    _parametres.difficulté = document.getElementById("diff").value;
+    // Ajuster les paramètres du jeu selon la difficulté
+    _parametres.difficulte = document.getElementById("diff").value;
 
-    if (_parametres.difficulté === "Difficile") {
+    if (_parametres.difficulte === "Difficile") {
         _parametres.nbPaires = 10;
-        
         secondesRestantes = 40;
+
     } else {
         _parametres.nbPaires = 12;
-        secondesRestantes = _parametres.temps; // par exemple 60
+        secondesRestantes = _parametres.temps;
     }
     
     
@@ -112,6 +114,8 @@ function init_jeu_memoire() {
 
 	const main = document.getElementById("main");
     main.innerHTML = "";
+    document.getElementById("titreJeu").textContent = "Jeu mémoire";
+
     afficherParametres("main", _parametres);
     tableauDesCartes = genererCartes(_parametres.nbPaires);
     console.log("tableauDesCartes : ", tableauDesCartes);
@@ -204,6 +208,8 @@ function lancerMinuterie() {
         }
     }, 1000);
 }
+
+
 
 function arreterMinuterie() {
     if (timer) clearInterval(timer);
