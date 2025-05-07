@@ -135,6 +135,7 @@ function afficherQuestion(){
     let main= document.getElementById("main");
     main.textContent ="";
 
+    
     if (indexQuestion>=donnees.length){
         afficherResultat();
         return;
@@ -252,6 +253,8 @@ function init_quiz() {
 
 	// On doiter vider le <main> et on affiche le quiz, à partir de votre source de données "donnees", qui est une variable globale
     let main= document.getElementById("main");
+    document.getElementById("titreJeu").textContent = "Quiz";
+
     
     main.textContent ="";
 	// Vous remplacer son contenu par le contenu de votre quiz, vos questions et réponses, etc.
