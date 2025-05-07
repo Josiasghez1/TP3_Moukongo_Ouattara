@@ -35,8 +35,11 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
 
 function debuterJeuMémoire() {
     const main = document.getElementById("main");
+    const zon1 = document.getElementById("zoneJeu");
+     if(zon1){
+        zon1.remove();
+     }
     
-
     // Créer la zone du jeu
     const sectionJeu = document.createElement("section");
     sectionJeu.id = "zoneJeu";
@@ -60,9 +63,8 @@ function debuterJeuMémoire() {
         _parametres.nbPaires = 12;
         secondesRestantes = _parametres.temps;
     }
+    _parametres.nbPaires= document.getElementById("nbPaires").value;
     
-    
-
 
     tableauDesCartes = genererCartes(_parametres.nbPaires);
 
