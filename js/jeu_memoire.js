@@ -63,7 +63,7 @@ function debuterJeuMémoire() {
         _parametres.nbPaires = 12;
         secondesRestantes = _parametres.temps;
     }
-    _parametres.nbPaires= document.getElementById("nbPaires").value;
+   
     
 
     tableauDesCartes = genererCartes(_parametres.nbPaires);
