@@ -40,6 +40,8 @@ function debuterJeuMémoire() {
         zon1.remove();
      }
     
+    
+
     // Créer la zone du jeu
     const sectionJeu = document.createElement("section");
     sectionJeu.id = "zoneJeu";
