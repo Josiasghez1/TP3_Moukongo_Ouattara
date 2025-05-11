@@ -10,7 +10,7 @@ let tableauDesCartes = [];
 let _parametres = {
     nbPaires: 12,
     temps: 60,
-     age: 30,
+    age: 30,
     difficulté: "Facile"
 };
 
@@ -20,8 +20,11 @@ let secondesRestantes = 0;
 let carteRetournee = null;
 let verrouillage = false;
 let nbErreurs = 0;
+let deuxiemeCarte = null;
+let numDeuxiemeCarte = "";
+let jeuTermine = false;  // Ajout d'une variable pour gérer la fin du jeu
 let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
-	
+
 /* FIN variables globales */ 
 // ##########################
 	
@@ -33,68 +36,60 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
     // Générer les cartes une seule fois
     //tableauDesCartes = genererCartes(_paramètres.nbPaires);
 
-function debuterJeuMémoire() {
-    const main = document.getElementById("main");
-    const zon1 = document.getElementById("zoneJeu");
-     if(zon1){
-        zon1.remove();
-     }
+
+    function debuterJeuMémoire() {
+        const main = document.getElementById("main");
+        const zon1 = document.getElementById("zoneJeu");
+        if (zon1) {
+            zon1.remove();
+        }
     
-    // Créer la zone du jeu
-    const sectionJeu = document.createElement("section");
-    sectionJeu.id = "zoneJeu";
-    sectionJeu.className = "grid-cartes";
-    main.appendChild(sectionJeu);
-
-    nbPairesTrouvees = 0;
-    nbErreurs = 0;
-    carteRetournee = null;
-    verrouillage = false;
-   
-
-    // Ajuster les paramètres du jeu selon la difficulté
-    _parametres.difficulte = document.getElementById("diff").value;
-
-    if (_parametres.difficulte === "Difficile") {
-        _parametres.nbPaires = 10;
-        secondesRestantes = 40;
-
-    } else {
-        _parametres.nbPaires = 12;
-        secondesRestantes = _parametres.temps;
+        // Réinitialisation des variables
+        nbPairesTrouvees = 0;
+        nbErreurs = 0;
+        carteRetournee = null;
+        verrouillage = false;
+        jeuTermine = false;  // Réinitialisation à chaque début de partie
+    
+        _parametres.difficulte = document.getElementById("diff").value;
+        _parametres.temps = parseInt(document.getElementById("temps").value);
+    
+        if (_parametres.difficulte === "Difficile") {
+            _parametres.nbPaires = 10;
+            secondesRestantes = 40;
+        } else {
+            _parametres.nbPaires = 12;
+            secondesRestantes = _parametres.temps;
+        }
+    
+        _parametres.nbPaires = document.getElementById("nbPaires").value;
+        tableauDesCartes = genererCartes(_parametres.nbPaires);
+    
+        const sectionJeu = document.createElement("section");
+        sectionJeu.id = "zoneJeu";
+        sectionJeu.className = "grid-cartes";
+        main.appendChild(sectionJeu);
+    
+        for (let i = 0; i < tableauDesCartes.length; i++) {
+            const id = tableauDesCartes[i];
+            const divCarte = document.createElement("div");
+            divCarte.classList.add("carte");
+    
+            const img = document.createElement("img");
+            img.src = "images/hidden.png";
+            img.id = id;
+            img.dataset.cacher = "oui";
+            img.dataset.numcarte = id;
+            img.classList.add("cacherCarte");
+            img.addEventListener("click", gererClicCarte);
+    
+            divCarte.appendChild(img);
+            sectionJeu.appendChild(divCarte);
+        }
+    
+        lancerMinuterie();
+        jouerMusiqueFond();
     }
-   
-    
-
-    tableauDesCartes = genererCartes(_parametres.nbPaires);
-
-    for (let i = 0; i < tableauDesCartes.length; i++) {
-        const id = tableauDesCartes[i];
-        const divCarte = document.createElement("div");
-        divCarte.classList.add("carte");
-    
-        const img = document.createElement("img");
-        img.src = "images/hidden.png";
-        img.id = id;
-        img.dataset.cacher = "oui";
-        img.dataset.numcarte = id;
-        img.classList.add("cacherCarte");
-        img.addEventListener("click", gererClicCarte);
-    
-        divCarte.appendChild(img);
-        sectionJeu.appendChild(divCarte);
-    }
-    
-
-    lancerMinuterie();
-   jouerMusiqueFond();
-}
-
-
-
-
-
-
 
 /**
  * Terminer le jeu (le bouton Terminer est cliqué). Cet événement est déjà associé au bon bouton de l'interface
@@ -102,6 +97,7 @@ function debuterJeuMémoire() {
  */
 function terminerJeuMémoire() {
     arreterMinuterie();
+    arreterMusiqueFond();
     afficherFinPartie(false);
 }
 
@@ -131,69 +127,72 @@ function gererClicCarte(evt) {
     if (verrouillage) return;
 
     const img = evt.target;
-
-    // Si déjà visible, on ne fait rien
     if (img.dataset.cacher === "non") return;
 
-    // Extraire l'id de la carte
-    const idCarte = img.id; // ex: carte-3c ou carte-3
-
-    // Récupérer uniquement les chiffres après "carte-" et ignorer "c" s'il est présent
+    const idCarte = img.id;
     let numCarte = "";
     for (let i = 6; i < idCarte.length; i++) {
         if (!isNaN(idCarte[i])) {
-            numCarte += idCarte[i]; // ajouter uniquement les chiffres
+            numCarte += idCarte[i];
         }
     }
 
-    // Afficher l'image de la carte
     img.src = `cartes/${numCarte}.jpg`;
     img.dataset.cacher = "non";
 
-    // Comparaison avec la 1ère carte retournée
-    if (!carteRetournee) {
+    if (carteRetournee === null) {
+        // Première carte retournée
         carteRetournee = img;
-        carteRetournee.dataset.num = numCarte; // on garde son numéro simple
+        carteRetournee.dataset.num = numCarte;
     } else {
+        // Deuxième carte retournée
+        deuxiemeCarte = img;
+        numDeuxiemeCarte = numCarte;
         verrouillage = true;
-
-        setTimeout(() => {
-            const num1 = carteRetournee.dataset.num;
-            const num2 = numCarte;
-
-            if (num1 === num2 && img.id !== carteRetournee.id) {
-                // C’est une paire
-                carteRetournee = null;
-                nbPairesTrouvees++;
-                jouerSonSucces();
-
-                if (nbPairesTrouvees === _parametres.nbPaires) {
-                    arreterMinuterie();
-                    afficherFinPartie(true);
-                }
-            } else {
-                // Pas une paire
-                img.src = "images/hidden.png";
-                img.dataset.cacher = "oui";
-
-                carteRetournee.src = "images/hidden.png";
-                carteRetournee.dataset.cacher = "oui";
-
-                carteRetournee = null;
-                nbErreurs++;
-                jouerSonErreur();
-
-                if (_parametres.difficulte === "Difficile" && nbErreurs >= 4) {
-                    arreterMinuterie();
-                    afficherFinPartie(false);
-                }
-            }
-
-            verrouillage = false;
-        }, 1000);
+        setTimeout(verifierPaire, 1000);
     }
 }
 
+
+function verifierPaire() {
+    if (jeuTermine) return;  // Vérifier si le jeu est déjà terminé
+
+    var num1 = carteRetournee.dataset.num;
+    var num2 = numDeuxiemeCarte;
+    var estPaire = (num1 === num2 && deuxiemeCarte.id !== carteRetournee.id);
+
+    if (estPaire) {
+        carteRetournee = null;
+        deuxiemeCarte = null;
+        nbPairesTrouvees++;
+        jouerSonSucces();
+
+        if (nbPairesTrouvees === _parametres.nbPaires && !jeuTermine) {
+            jeuTermine = true;  // Marquer le jeu comme terminé
+            arreterMinuterie();
+            arreterMusiqueFond();
+            jouerSonGagne();
+            afficherFinPartie(true);
+        }
+    } else {
+        deuxiemeCarte.src = "images/hidden.png";
+        deuxiemeCarte.dataset.cacher = "oui";
+        carteRetournee.src = "images/hidden.png";
+        carteRetournee.dataset.cacher = "oui";
+
+        carteRetournee = null;
+        deuxiemeCarte = null;
+        nbErreurs++;
+        jouerSonErreur();
+
+        if (_parametres.difficulte === "Difficile" && nbErreurs >= 4) {
+            arreterMinuterie();
+            afficherFinPartie(false);
+        }
+    }
+
+    verrouillage = false;
+}
 
 /* Minuterie et Fin de partie*/ 
 // #########################
@@ -201,66 +200,53 @@ function gererClicCarte(evt) {
 function lancerMinuterie() {
     const zoneMinuterie = document.getElementById("timer"); 
     zoneMinuterie.textContent = `${secondesRestantes}s`;
-    
-    timer = setInterval(() => {
-        secondesRestantes--;
-        zoneMinuterie.textContent = `${secondesRestantes}s`;
-        if (secondesRestantes <= 0)
-         {
-            clearInterval(timer);
-            afficherFinPartie(false);
-        }
-    }, 1000);
+
+    timer = setInterval(mettreAJourMinuterie, 1000);
 }
 
+function mettreAJourMinuterie() {
+    if (jeuTermine) return;  // Arrêter la minuterie si le jeu est fini
 
+    const zoneMinuterie = document.getElementById("timer");
+    secondesRestantes--;
+    zoneMinuterie.textContent = `${secondesRestantes}s`;
+
+    if (secondesRestantes <= 0) {
+        clearInterval(timer);
+        afficherFinPartie(false);
+        jeuTermine = true;  // Marquer le jeu comme terminé si le temps est écoulé
+    }
+}
 
 function arreterMinuterie() {
-    if (timer) clearInterval(timer);
-    arreterMusiqueFond();
+    if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+    }
 }
 
 function afficherFinPartie(reussi) {
-
     const zoneJeu = document.getElementById("zoneJeu");
     zoneJeu.innerHTML = "";
 
     const message = document.createElement("h2");
-
-   if (reussi)
-    {
-        message.textContent = "Bravo, vous avez gagné !";
-    }
-    else 
-    {
-        message.textContent = "Dommage, vous avez perdu.";
-    }
-
+    message.textContent = reussi ? "Bravo, vous avez gagné !" : "Dommage, vous avez perdu.";
 
     const img = document.createElement("img");
-
-    if (reussi) {
-        img.src = "images/valide.png";
-        img.alt = "succès";
-    } 
-    else {
-        img.src = "images/invalide.png";
-        img.alt = "échec";
-    }
+    img.src = reussi ? "images/valide.png" : "images/invalide.png";
+    img.alt = reussi ? "succès" : "échec";
     img.style.maxWidth = "300px";
 
     zoneJeu.appendChild(message);
     zoneJeu.appendChild(img);
 
     if (reussi) {
-        jouerSonGagne(); // Joue un son de victoire
-        arreterMusiqueFond();
-    } 
-    else {
-        jouerSonPerdu(); // Joue un son d'échec
-        arreterMusiqueFond();
+        jouerSonGagne();
+    } else {
+        jouerSonPerdu();
     }
     
+    arreterMusiqueFond();
 }
 
 /* Sons et Musique*/ 
@@ -273,10 +259,9 @@ function jouerMusiqueFond() {
 }
 
 function arreterMusiqueFond() {
-    if (audioFond) 
-    {
+    if (audioFond) {
         audioFond.pause();
-        audioFond.currentTime = 0;
+        audioFond.currentTime = 0; // Remettre à zéro si nécessaire
     }
 }
 
@@ -293,6 +278,7 @@ function jouerSonErreur() {
 function jouerSonGagne() {
     audioGagne = new Audio("sons/gagne.wav");
     audioGagne.play();
+    
 }
 
 function jouerSonPerdu() {

@@ -15,7 +15,6 @@ let donnees = [
             "Le serpent",
             "Le lézard ",
             "La grenouille"
-           
         ],
         réponse: 0
        
@@ -32,9 +31,6 @@ let donnees = [
         
 
     },
-
-    
-
     {
         question: "Quel oiseau ne peut pas voler mais court très vite ?",
         réponses: [
@@ -51,8 +47,7 @@ let donnees = [
             "Le guépard",
             "Le lion",
             "Le cheval",
-            "L’antilope "
-            
+            "L’antilope "  
         ],
         réponse: 0
     },
@@ -62,8 +57,7 @@ let donnees = [
             "Le chat",
             "Le perroquet ",
             "Le singe ",
-            "L’oiseau colibri "
-             
+            "L’oiseau colibri "   
         ],
         réponse: 1
     },
@@ -72,8 +66,8 @@ let donnees = [
         réponses: [
             "Le tigrel",
             "La tortue",
-            "Le singe"
-            
+            "Le singe",
+            "Le chat" 
         ],
         réponse: 2
     },
@@ -83,8 +77,7 @@ let donnees = [
             "Le chat",
             "Le papillon",
             "Le chien",
-            "La tortue "
-          
+            "La tortue " 
         ],
         réponse: 3
     },
@@ -94,8 +87,7 @@ let donnees = [
             "Le chat",
             "Le chien",
             "Le singe",
-            "La poule"
-            
+            "La poule" 
         ],
         réponse: 1
     },
@@ -126,7 +118,6 @@ let donnees = [
 
  let score =0;
  let indexQuestion = 0;
- 
 
 //* FIN variables globales */	
 // // ##########################
@@ -141,26 +132,28 @@ function afficherQuestion(){
         return;
     }
 
-    let q = donnees[indexQuestion];
-    let titre = document.createElement("h2");
+   let questionnaire = donnees[indexQuestion];
+
+   let titre = document.createElement("h2");
    titre.textContent = `Question ${indexQuestion + 1}/${donnees.length}`;
    titre.style.marginBottom = "20 px";
    titre.style.fontWeight="bold";
    main.appendChild(titre);
 
-   let p = document.createElement("p");
-   p.textContent = q.question;
-   p.style.marginBottom ="20px";
-   main.appendChild (p);
+   let paragraphe = document.createElement("p");
+   paragraphe.textContent = questionnaire.question;
+   paragraphe.style.marginBottom ="20px";
+   main.appendChild (paragraphe);
+
    let ol = document.createElement("ol");
- 
-   for (let i = 0; i<q.réponses.length;i++){
+   for (let i = 0; i<questionnaire.réponses.length;i++){
     let li = document.createElement("li");
-    li.textContent =q.réponses[i];
+    li.textContent =questionnaire.réponses[i];
     ol.appendChild(li);
 
    };
    main.appendChild(ol);
+
    let label = document.createElement("label");
    label.textContent = "Réponse: ";
    label.setAttribute ("for","champReponse");
@@ -188,6 +181,7 @@ function afficherQuestion(){
    main.appendChild(bouton);
    
 }
+
 function verifierReponse(){
    
     let champ = document.getElementById("champReponse");
@@ -198,6 +192,7 @@ function verifierReponse(){
             afficherQuestion();
             return;
         }
+
     if( isNaN(reponseUtilisateur) || reponseUtilisateur<1 || reponseUtilisateur>donnees[indexQuestion].réponses.length)
         {
             alert("Veuillez entrer une réponse valide !!!");
@@ -217,10 +212,6 @@ function verifierReponse(){
      indexQuestion++ ;
      afficherQuestion();
 }
-
-
-
-
 
 function afficherResultat(){
     let main= document.getElementById("main");
@@ -244,10 +235,6 @@ function afficherResultat(){
     main.appendChild(img);
     
 }
-
-
-
-
 
 function init_quiz() {
 

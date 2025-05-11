@@ -3,100 +3,106 @@
  
 /* DÉBUT variables globales */
 // ##########################
- 
-function validerPrenom() {
-    const prenom = document.getElementById("txt-prenom").value.trim();
-    const msgErreur = document.getElementById("msg_erreurPrenom");
-    msgErreur.textContent = "";
- 
-    if (prenom === "") {
-        msgErreur.textContent = "Champ requis";
-        return false;
-    }
 
-    if (prenom === document.getElementById("txt-nom").value.trim()) {
-        msgErreur.textContent = "Le prénom doit être différent du nom";
-        return false;
-    }
- 
-    return true;
-}
- 
-function validerNom() {
-    const nom = document.getElementById("txt-nom").value.trim();
-    const msgErreur = document.getElementById("msg_erreurNom");
-    const prenom = document.getElementById("txt-prenom").value.trim();
-    msgErreur.textContent = "";
- 
-    if (nom === "") {
-        msgErreur.textContent = "Champ requis";
-        return false;
-    }
+const txtPrenom = document.getElementById("txt-prenom");
+const txtNom = document.getElementById("txt-nom");
+const emailNewsletter = document.getElementById("email-newsletter");
+const confirmationCourriel = document.getElementById("confirmationCourriel");
+const pseudo = document.getElementById("pseudo");
 
-    if (nom === document.getElementById("txt-prenom").value.trim()) {
-        msgErreur.textContent = "Le nom doit être différent du prénom";
-        return false;
-    }
- 
-    return true;
-}
- 
-function validerCourriel() {
-    const courriel = document.getElementById("email-newsletter").value.trim();
-    const msgErreur = document.getElementById("msg_erreurCourriel");
-    msgErreur.textContent = "";
- 
-    const regexCourriel = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
- 
-    if (courriel === "") {
-        msgErreur.textContent = "Champ requis";
-        return false;
-    } else if (!regexCourriel.test(courriel)) {
-        msgErreur.textContent = "Courriel invalide";
-        return false;
-    }
- 
-    return true;
-}
- 
-function validerConfirmationCourriel() {
-    const courriel = document.getElementById("email-newsletter").value.trim();
-    const confirmation = document.getElementById("confirmationCourriel").value.trim();
-    const msgErreur = document.getElementById("msg_erreurConfirmationCourriel");
-    msgErreur.textContent = "";
- 
-    if (confirmation === "") {
-        msgErreur.textContent = "Champ requis";
-        return false;
-    } else if (courriel !== confirmation) {
-        msgErreur.textContent = "Les courriels ne correspondent pas";
-        return false;
-    }
- 
-    return true;
-}
- 
-function validerPseudo() {
-    const pseudo = document.getElementById("pseudo").value.trim();
-    const msgErreur = document.getElementById("msg_erreurPseudo");
-    msgErreur.textContent = "";
- 
-    const regexPseudo = /^[a-zA-Z]{3,25}$/;
- 
-    if (pseudo === "") {
-        msgErreur.textContent = "Champ requis";
-        return false;
-    } else if (!regexPseudo.test(pseudo)) {
-        msgErreur.textContent = "Le pseudo doit contenir uniquement des lettres (3 à 25 caractères)";
-        return false;
-    }
- 
-    return true;
-}
-
+const msgErreurPrenom = document.getElementById("msg_erreurPrenom");
+const msgErreurNom = document.getElementById("msg_erreurNom");
+const msgErreurCourriel = document.getElementById("msg_erreurCourriel");
+const msgErreurConfirmationCourriel = document.getElementById("msg_erreurConfirmationCourriel");
+const msgErreurPseudo = document.getElementById("msg_erreurPseudo");
 
 /* FIN variables globales */ 
 // ##########################
+
+function validerPrenom() {
+    const prenom = txtPrenom.value.trim();
+    msgErreurPrenom.textContent = "";
+
+    if (prenom === "") {
+        msgErreurPrenom.textContent = "Champ requis";
+        return false;
+    }
+
+    if (prenom === txtNom.value.trim()) {
+        msgErreurPrenom.textContent = "Le prénom doit être différent du nom";
+        return false;
+    }
+
+    return true;
+}
+
+function validerNom() {
+    const nom = txtNom.value.trim();
+    const prenom = txtPrenom.value.trim();
+    msgErreurNom.textContent = "";
+
+    if (nom === "") {
+        msgErreurNom.textContent = "Champ requis";
+        return false;
+    }
+
+    if (nom === prenom) {
+        msgErreurNom.textContent = "Le nom doit être différent du prénom";
+        return false;
+    }
+
+    return true;
+}
+
+function validerCourriel() {
+    const courriel = emailNewsletter.value.trim();
+    msgErreurCourriel.textContent = "";
+
+    const regexCourriel = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
+
+    if (courriel === "") {
+        msgErreurCourriel.textContent = "Champ requis";
+        return false;
+    } else if (!regexCourriel.test(courriel)) {
+        msgErreurCourriel.textContent = "Courriel invalide";
+        return false;
+    }
+
+    return true;
+}
+
+function validerConfirmationCourriel() {
+    const courriel = emailNewsletter.value.trim();
+    const confirmation = confirmationCourriel.value.trim();
+    msgErreurConfirmationCourriel.textContent = "";
+
+    if (confirmation === "") {
+        msgErreurConfirmationCourriel.textContent = "Champ requis";
+        return false;
+    } else if (courriel !== confirmation) {
+        msgErreurConfirmationCourriel.textContent = "Les courriels ne correspondent pas";
+        return false;
+    }
+
+    return true;
+}
+
+function validerPseudo() {
+    const valPseudo = pseudo.value.trim();
+    msgErreurPseudo.textContent = "";
+
+    const regexPseudo = /^[a-zA-Z]{3,25}$/;
+
+    if (valPseudo === "") {
+        msgErreurPseudo.textContent = "Champ requis";
+        return false;
+    } else if (!regexPseudo.test(valPseudo)) {
+        msgErreurPseudo.textContent = "Le pseudo doit contenir uniquement des lettres (3 à 25 caractères)";
+        return false;
+    }
+
+    return true;
+}
 
 function afficherChoixJeu()
 {
@@ -176,10 +182,7 @@ function afficherChoixJeu()
     // ----------- Ajouter toute la rangée dans <main> ------------
     main.appendChild(divRow);
 }
-
 	
-
-
 function validerFormulaire() {
     const validePrenom = validerPrenom();
     const valideNom = validerNom();
@@ -207,7 +210,6 @@ function gererBtnInvite()
         afficherChoixJeu();
 }
  
- 
 function init_formulaire() {
  
     document.getElementById("txt-prenom").addEventListener("blur", validerPrenom);
@@ -223,6 +225,5 @@ function init_formulaire() {
     document.getElementById("btnSoumettre").addEventListener("click", validerFormulaire, false);
 }
  
-   
 addEventListener('load', init_formulaire, false);
  

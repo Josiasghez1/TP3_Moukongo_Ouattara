@@ -14,7 +14,6 @@ div {
 header, footer {
   background-color: #e0903c;
   color: white;
-  padding: 15px;
   text-align: center;
 }
 
@@ -111,4 +110,13 @@ button {
 
 #parametres button:hover {
   background-color: #F9D778;
+}
+
+.logo {
+  width: 100px;
+}
+
+.titre {
+  font-size: 30px;
+  margin: 0px;
 }/*# sourceMappingURL=styles.css.map */
