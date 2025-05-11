@@ -36,40 +36,65 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
     // Générer les cartes une seule fois
     //tableauDesCartes = genererCartes(_paramètres.nbPaires);
 
-
     function debuterJeuMémoire() {
         const main = document.getElementById("main");
         const zon1 = document.getElementById("zoneJeu");
-        if (zon1) {
+         if(zon1){
             zon1.remove();
+         }
+        
+        // Créer la zone du jeu
+        const sectionJeu = document.createElement("section");
+        sectionJeu.id = "zoneJeu";
+        sectionJeu.className = "grid-cartes";
+        main.appendChild(sectionJeu);
+    
+        nbPairesTrouvees = 0;
+        nbErreurs = 0;
+        carteRetournee = null;
+        verrouillage = false;
+       
+    
+        // Ajuster les paramètres du jeu selon la difficulté
+        _parametres.difficulte = document.getElementById("diff").value;
+    
+        // Ajuster les paramètres du jeu selon la temps
+        _parametres.temps = parseInt(document.getElementById("temps").value);
+    
+        if (_parametres.difficulte === "Difficile") {
+            _parametres.nbPaires = 10;
+            secondesRestantes = 40;
+    
+        } else {
+            _parametres.nbPaires = 12;
+            secondesRestantes = _parametres.temps;
         }
+        _parametres.nbPaires= document.getElementById("nbPaires").value;
+        
     
+        tableauDesCartes = genererCartes(_parametres.nbPaires);
     
-
-    // Créer la zone du jeu
-    const sectionJeu = document.createElement("section");
-    sectionJeu.id = "zoneJeu";
-    sectionJeu.className = "grid-cartes";
-    main.appendChild(sectionJeu);
-
-    nbPairesTrouvees = 0;
-    nbErreurs = 0;
-    carteRetournee = null;
-    verrouillage = false;
-   
-
-    // Ajuster les paramètres du jeu selon la difficulté
-    _parametres.difficulte = document.getElementById("diff").value;
-
-    if (_parametres.difficulte === "Difficile") {
-        _parametres.nbPaires = 10;
-        secondesRestantes = 40;
-
-    } else {
-        _parametres.nbPaires = 12;
-        secondesRestantes = _parametres.temps;
-    }   
-}
+        for (let i = 0; i < tableauDesCartes.length; i++) {
+            const id = tableauDesCartes[i];
+            const divCarte = document.createElement("div");
+            divCarte.classList.add("carte");
+        
+            const img = document.createElement("img");
+            img.src = "images/hidden.png";
+            img.id = id;
+            img.dataset.cacher = "oui";
+            img.dataset.numcarte = id;
+            img.classList.add("cacherCarte");
+            img.addEventListener("click", gererClicCarte);
+        
+            divCarte.appendChild(img);
+            sectionJeu.appendChild(divCarte);
+        }
+        
+    
+        lancerMinuterie();
+       jouerMusiqueFond();
+    }
 
 /**
  * Terminer le jeu (le bouton Terminer est cliqué). Cet événement est déjà associé au bon bouton de l'interface
