@@ -44,6 +44,7 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
             zon1.remove();
         }
     
+<<<<<<< HEAD
         // Réinitialisation des variables
         nbPairesTrouvees = 0;
         nbErreurs = 0;
@@ -89,6 +90,32 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
     
         lancerMinuterie();
         jouerMusiqueFond();
+=======
+    
+
+    // Créer la zone du jeu
+    const sectionJeu = document.createElement("section");
+    sectionJeu.id = "zoneJeu";
+    sectionJeu.className = "grid-cartes";
+    main.appendChild(sectionJeu);
+
+    nbPairesTrouvees = 0;
+    nbErreurs = 0;
+    carteRetournee = null;
+    verrouillage = false;
+   
+
+    // Ajuster les paramètres du jeu selon la difficulté
+    _parametres.difficulte = document.getElementById("diff").value;
+
+    if (_parametres.difficulte === "Difficile") {
+        _parametres.nbPaires = 10;
+        secondesRestantes = 40;
+
+    } else {
+        _parametres.nbPaires = 12;
+        secondesRestantes = _parametres.temps;
+>>>>>>> c7d2f9229fc5ecfb899349ea35a63ccfab9ab7a7
     }
 
 /**
