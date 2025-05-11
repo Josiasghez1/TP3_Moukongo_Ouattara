@@ -44,53 +44,6 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
             zon1.remove();
         }
     
-<<<<<<< HEAD
-        // Réinitialisation des variables
-        nbPairesTrouvees = 0;
-        nbErreurs = 0;
-        carteRetournee = null;
-        verrouillage = false;
-        jeuTermine = false;  // Réinitialisation à chaque début de partie
-    
-        _parametres.difficulte = document.getElementById("diff").value;
-        _parametres.temps = parseInt(document.getElementById("temps").value);
-    
-        if (_parametres.difficulte === "Difficile") {
-            _parametres.nbPaires = 10;
-            secondesRestantes = 40;
-        } else {
-            _parametres.nbPaires = 12;
-            secondesRestantes = _parametres.temps;
-        }
-    
-        _parametres.nbPaires = document.getElementById("nbPaires").value;
-        tableauDesCartes = genererCartes(_parametres.nbPaires);
-    
-        const sectionJeu = document.createElement("section");
-        sectionJeu.id = "zoneJeu";
-        sectionJeu.className = "grid-cartes";
-        main.appendChild(sectionJeu);
-    
-        for (let i = 0; i < tableauDesCartes.length; i++) {
-            const id = tableauDesCartes[i];
-            const divCarte = document.createElement("div");
-            divCarte.classList.add("carte");
-    
-            const img = document.createElement("img");
-            img.src = "images/hidden.png";
-            img.id = id;
-            img.dataset.cacher = "oui";
-            img.dataset.numcarte = id;
-            img.classList.add("cacherCarte");
-            img.addEventListener("click", gererClicCarte);
-    
-            divCarte.appendChild(img);
-            sectionJeu.appendChild(divCarte);
-        }
-    
-        lancerMinuterie();
-        jouerMusiqueFond();
-=======
     
 
     // Créer la zone du jeu
@@ -115,8 +68,8 @@ let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
     } else {
         _parametres.nbPaires = 12;
         secondesRestantes = _parametres.temps;
->>>>>>> c7d2f9229fc5ecfb899349ea35a63ccfab9ab7a7
-    }
+    }   
+}
 
 /**
  * Terminer le jeu (le bouton Terminer est cliqué). Cet événement est déjà associé au bon bouton de l'interface
@@ -147,6 +100,7 @@ function init_jeu_memoire() {
    // tableauDesCartes = genererCartes(_parametres.nbPaires);
     console.log("tableauDesCartes : ", tableauDesCartes);
 }
+
 /* Gestion des cartes */ 
 // #####################
 
