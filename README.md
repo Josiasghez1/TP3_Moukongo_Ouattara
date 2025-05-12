@@ -1,1 +1,1 @@
-Moukongo a fait le formulaire , Ouattara le quizz et enzemble nous avons fait le jeu mémoire.
+Moukongo a fait le formulaire , Ouattara le quizz et ensemble nous avons fait le jeu mémoire.
