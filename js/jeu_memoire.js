@@ -173,7 +173,9 @@ function verifierPaire() {
         nbPairesTrouvees++;
         jouerSonSucces();
 
-        _parametres.nbPaires= document.getElementById("nbPaires").value;
+        // _parametres.nbPaires= document.getElementById("nbPaires").value;
+        _parametres.nbPaires = parseInt(document.getElementById("nbPaires").value);
+
         if (nbPairesTrouvees === _parametres.nbPaires && !jeuTermine) {
             jeuTermine = true;  // Marquer le jeu comme terminé
             arreterMinuterie();
