@@ -67,11 +67,12 @@ button {
 
 #zoneJeu {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(5, 1fr); /* max 5 cartes par ligne */
     gap: 15px;
     padding: 20px;
     justify-items: center;
 }
+
 
 #zoneJeu img {
     width: 100px;
@@ -86,6 +87,9 @@ button {
 #zoneJeu img:hover {
     transform: scale(1.05);
 }
+
+
+
 
 /* Style de la section des paramètres (optionnel pour rendre plus beau) */
 

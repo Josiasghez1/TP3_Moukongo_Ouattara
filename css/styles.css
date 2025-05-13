@@ -63,7 +63,7 @@ button {
 /* Style pour le jeu de mémoire */
 #zoneJeu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(5, 1fr); /* max 5 cartes par ligne */
   gap: 15px;
   padding: 20px;
   justify-items: center;
