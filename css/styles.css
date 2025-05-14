@@ -2,7 +2,6 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: verdana, sans-serif;
   background-color: white;
   font-family: "Roboto", sans-serif;
 }
@@ -112,6 +111,26 @@ button {
   background-color: #F9D778;
 }
 
+.parametres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Ajuster l'apparence des labels et inputs */
+.parametres label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.parametres input {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
 .logo {
   width: 100px;
 }
@@ -119,4 +138,28 @@ button {
 .titre {
   font-size: 30px;
   margin: 0px;
+}
+
+@keyframes bonne-reponse {
+  0% {
+    background-color: #d4edda;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@keyframes mauvaise-reponse {
+  0% {
+    background-color: #f8d7da;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.flash-bonne {
+  animation: bonne-reponse 0.5s ease;
+}
+
+.flash-mauvaise {
+  animation: mauvaise-reponse 0.5s ease;
 }/*# sourceMappingURL=styles.css.map */

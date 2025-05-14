@@ -64,7 +64,7 @@ let donnees = [
     {
         question: "Quel animal est connu pour être un excellent grimpeur et très proche de l’humain ?",
         réponses: [
-            "Le tigrel",
+            "Le tigre",
             "La tortue",
             "Le singe",
             "Le chat" 
@@ -182,35 +182,43 @@ function afficherQuestion(){
    
 }
 
-function verifierReponse(){
-   
+function verifierReponse() {
     let champ = document.getElementById("champReponse");
-    let reponseUtilisateur = parseInt(champ.value) ;
-    if(champ.value=== "")
-        {
-            indexQuestion++;
-            afficherQuestion();
-            return;
-        }
+    let reponseUtilisateur = parseInt(champ.value);
+    let main = document.getElementById("main");
 
-    if( isNaN(reponseUtilisateur) || reponseUtilisateur<1 || reponseUtilisateur>donnees[indexQuestion].réponses.length)
-        {
-            alert("Veuillez entrer une réponse valide !!!");
-            return;
-        }
-    
-     let bonneReponse = donnees[indexQuestion].réponse;
-         
-    if (reponseUtilisateur-1 ===bonneReponse){
+    if (champ.value === "") {
+        indexQuestion++;
+        afficherQuestion();
+        return;
+    }
+
+    if (isNaN(reponseUtilisateur) || reponseUtilisateur < 1 || reponseUtilisateur > donnees[indexQuestion].réponses.length) {
+        alert("Veuillez entrer une réponse valide !!!");
+        return;
+    }
+
+    let bonneReponse = donnees[indexQuestion].réponse;
+
+    if (reponseUtilisateur - 1 === bonneReponse) {
         console.log("Bonne réponse !");
         score++;
-    }
-    else{
+        main.classList.add("flash-bonne");
+    } else {
         console.log("Mauvaise réponse !");
+        main.classList.add("flash-mauvaise");
     }
-    
-     indexQuestion++ ;
-     afficherQuestion();
+
+    // Supprimer la classe d'animation après 0.5 seconde
+    setTimeout(retirerAnimation, 500);
+
+    function retirerAnimation() {
+        main.classList.remove("flash-bonne");
+        main.classList.remove("flash-mauvaise");
+    }
+
+    indexQuestion++;
+    afficherQuestion();
 }
 
 function afficherResultat(){
