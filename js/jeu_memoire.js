@@ -1,5 +1,5 @@
 'use strict';
-/* DÉBUT variables globales */ 
+/* DÉBUT variables globales */
 // ##########################
 // Tableaux pour contenir les identifiants des cartes du jeu de mémoire.
 // Voir un exemple d'utilisation dans la fonction init_jeu_memoire() au bas de ce fichier
@@ -25,76 +25,78 @@ let numDeuxiemeCarte = "";
 let jeuTermine = false;  // Ajout d'une variable pour gérer la fin du jeu
 let audioFond, audioSucces, audioErreur, audioGagne, audioPerdu;
 
-/* FIN variables globales */ 
+/* FIN variables globales */
 // ##########################
-	
+
 /**
  * Débuter le jeu de mémoire (le bouton "Débuter" est cliqué). Cet événement est déjà associé au bon bouton de l'interface
  * car il a été créé dans la fonction afficherParametres() dans le fichier js/utils.js
  */
 
-    // Générer les cartes une seule fois
-    //tableauDesCartes = genererCartes(_paramètres.nbPaires);
+// Générer les cartes une seule fois
+//tableauDesCartes = genererCartes(_paramètres.nbPaires);
 
-    function debuterJeuMémoire() {
-        const main = document.getElementById("main");
-        const zon1 = document.getElementById("zoneJeu");
-         if(zon1){
-            zon1.remove();
-         }
-        
-        // Créer la zone du jeu
-        const sectionJeu = document.createElement("section");
-        sectionJeu.id = "zoneJeu";
-        sectionJeu.className = "grid-cartes";
-        main.appendChild(sectionJeu);
-    
-        nbPairesTrouvees = 0;
-        nbErreurs = 0;
-        carteRetournee = null;
-        verrouillage = false;
-       
-    
-        // Ajuster les paramètres du jeu selon la difficulté
-        _parametres.difficulte = document.getElementById("diff").value;
-    
-        // Ajuster les paramètres du jeu selon la temps
-        _parametres.temps = parseInt(document.getElementById("temps").value);
-    
-        if (_parametres.difficulte === "Difficile") {
-            _parametres.nbPaires = 10;
-            secondesRestantes = 40;
-    
-        } else {
-            _parametres.nbPaires = 12;
-            secondesRestantes = _parametres.temps;
-        }
-        _parametres.nbPaires= document.getElementById("nbPaires").value;
-        
-    
-        tableauDesCartes = genererCartes(_parametres.nbPaires);
-    
-        for (let i = 0; i < tableauDesCartes.length; i++) {
-            const id = tableauDesCartes[i];
-            const divCarte = document.createElement("div");
-            divCarte.classList.add("carte");
-        
-            const img = document.createElement("img");
-            img.src = "images/hidden.png";
-            img.id = id;
-            img.dataset.cacher = "oui";
-            img.dataset.numcarte = id;
-            img.classList.add("cacherCarte");
-            img.addEventListener("click", gererClicCarte);
-        
-            divCarte.appendChild(img);
-            sectionJeu.appendChild(divCarte);
-        }
-        
-    
-        lancerMinuterie();
-       jouerMusiqueFond();
+function debuterJeuMémoire() {
+    const main = document.getElementById("main");
+    const zon1 = document.getElementById("zoneJeu");
+    if (zon1) {
+        zon1.remove();
     }
+
+    // Créer la zone du jeu
+    const sectionJeu = document.createElement("section");
+    sectionJeu.id = "zoneJeu";
+    sectionJeu.className = "grid-cartes";
+    main.appendChild(sectionJeu);
+
+    nbPairesTrouvees = 0;
+    nbErreurs = 0;
+    carteRetournee = null;
+    verrouillage = false;
+
+
+    // Ajuster les paramètres du jeu selon la difficulté
+    _parametres.difficulte = document.getElementById("diff").value;
+    _parametres.temps = parseInt(document.getElementById("temps").value);
+    _parametres.nbPaires = parseInt(document.getElementById("nbPaires").value);
+
+    // Ajuster les paramètres du jeu selon la temps
+    _parametres.temps = parseInt(document.getElementById("temps").value);
+
+    if (_parametres.difficulte === "Difficile") {
+        _parametres.nbPaires = 10;
+        secondesRestantes = 40;
+
+    } else {
+        _parametres.nbPaires = 12;
+        secondesRestantes = _parametres.temps;
+    }
+     _parametres.nbPaires = document.getElementById("nbPaires").value;
+
+
+    tableauDesCartes = genererCartes(_parametres.nbPaires);
+
+    for (let i = 0; i < tableauDesCartes.length; i++) {
+        const id = tableauDesCartes[i];
+        const divCarte = document.createElement("div");
+        divCarte.classList.add("carte");
+
+        const img = document.createElement("img");
+        img.src = "images/hidden.png";
+        img.id = id;
+        img.dataset.cacher = "oui";
+        img.dataset.numcarte = id;
+        img.classList.add("cacherCarte");
+        img.addEventListener("click", gererClicCarte);
+
+        divCarte.appendChild(img);
+        sectionJeu.appendChild(divCarte);
+    }
+
+
+    lancerMinuterie();
+    jouerMusiqueFond();
+}
 
 /**
  * Terminer le jeu (le bouton Terminer est cliqué). Cet événement est déjà associé au bon bouton de l'interface
@@ -108,25 +110,25 @@ function terminerJeuMémoire() {
 
 function init_jeu_memoire() {
 
-	// On doiter vider le <main> et on affiche le jeu de mémoire
-	// Affichage de son interface HTML (cartes, etc.) 
-	// Voir la documentation de la fonction pour plus de détails
-	// Exemple d'utilisation : 
-	// afficherParametres("main",_paramètres);
-	// tableauDesCartes = genererCartes(_paramètres.nbPaires * 2);
+    // On doiter vider le <main> et on affiche le jeu de mémoire
+    // Affichage de son interface HTML (cartes, etc.) 
+    // Voir la documentation de la fonction pour plus de détails
+    // Exemple d'utilisation : 
+    // afficherParametres("main",_paramètres);
+    // tableauDesCartes = genererCartes(_paramètres.nbPaires * 2);
 
-	// console.log("tableauDesCartes : ", tableauDesCartes);
+    // console.log("tableauDesCartes : ", tableauDesCartes);
 
-	const main = document.getElementById("main");
+    const main = document.getElementById("main");
     main.innerHTML = "";
     document.getElementById("titreJeu").textContent = "Jeu mémoire";
 
     afficherParametres("main", _parametres);
-   // tableauDesCartes = genererCartes(_parametres.nbPaires);
+    // tableauDesCartes = genererCartes(_parametres.nbPaires);
     console.log("tableauDesCartes : ", tableauDesCartes);
 }
 
-/* Gestion des cartes */ 
+/* Gestion des cartes */
 // #####################
 
 function gererClicCarte(evt) {
@@ -203,11 +205,11 @@ function verifierPaire() {
     verrouillage = false;
 }
 
-/* Minuterie et Fin de partie*/ 
+/* Minuterie et Fin de partie*/
 // #########################
 
 function lancerMinuterie() {
-    const zoneMinuterie = document.getElementById("timer"); 
+    const zoneMinuterie = document.getElementById("timer");
     zoneMinuterie.textContent = `${secondesRestantes}s`;
 
     timer = setInterval(mettreAJourMinuterie, 1000);
@@ -254,11 +256,11 @@ function afficherFinPartie(reussi) {
     } else {
         jouerSonPerdu();
     }
-    
+
     arreterMusiqueFond();
 }
 
-/* Sons et Musique*/ 
+/* Sons et Musique*/
 // ################
 
 function jouerMusiqueFond() {
@@ -287,7 +289,7 @@ function jouerSonErreur() {
 function jouerSonGagne() {
     audioGagne = new Audio("sons/gagne.wav");
     audioGagne.play();
-    
+
 }
 
 function jouerSonPerdu() {

@@ -3,6 +3,7 @@
  
 /* DÉBUT variables globales */
 // ##########################
+// Récupération des champs du formulaire
 
 const txtPrenom = document.getElementById("txt-prenom");
 const txtNom = document.getElementById("txt-nom");
@@ -10,6 +11,7 @@ const emailNewsletter = document.getElementById("email-newsletter");
 const confirmationCourriel = document.getElementById("confirmationCourriel");
 const pseudo = document.getElementById("pseudo");
 
+// Récupération des messages d'erreur à afficher
 const msgErreurPrenom = document.getElementById("msg_erreurPrenom");
 const msgErreurNom = document.getElementById("msg_erreurNom");
 const msgErreurCourriel = document.getElementById("msg_erreurCourriel");
@@ -22,12 +24,13 @@ const msgErreurPseudo = document.getElementById("msg_erreurPseudo");
 function validerPrenom() {
     const prenom = txtPrenom.value.trim();
     msgErreurPrenom.textContent = "";
+// Vérifie que le champ n'est pas vide
 
     if (prenom === "") {
         msgErreurPrenom.textContent = "Champ requis";
         return false;
     }
-
+ // Vérifie que le prénom est différent du nom 
     if (prenom === txtNom.value.trim()) {
         msgErreurPrenom.textContent = "Le prénom doit être différent du nom";
         return false;
@@ -58,6 +61,7 @@ function validerCourriel() {
     const courriel = emailNewsletter.value.trim();
     msgErreurCourriel.textContent = "";
 
+    // Expression régulière simple pour vérifier le format d'un email
     const regexCourriel = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/;
 
     if (courriel === "") {
@@ -90,7 +94,7 @@ function validerConfirmationCourriel() {
 function validerPseudo() {
     const valPseudo = pseudo.value.trim();
     msgErreurPseudo.textContent = "";
-
+// Vérifie que le pseudo contient seulement des lettres (entre 3 et 25 caractères)
     const regexPseudo = /^[a-zA-Z]{3,25}$/;
 
     if (valPseudo === "") {
@@ -114,7 +118,7 @@ function afficherChoixJeu()
 	// À la fin de cette fonction, on doit vider le <main> et afficher le jeu choisi par l'utilisateur
 
     const main = document.getElementById("main");
-    main.textContent = ""; // Vider le <main> proprement
+    main.textContent = ""; // Vide le <main> avant d'ajouter les nouveaux éléments
 
     // const nav = document.createElement("nav");
     // nav.textContent = "Formulaire";

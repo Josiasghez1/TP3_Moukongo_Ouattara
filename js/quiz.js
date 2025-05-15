@@ -7,6 +7,8 @@
 // Il s'agit d'un tableau d'objets, chaque objet contient une question, un tableau de réponses et l'indice de la bonne réponse
 // Vous remplacer son contenu par votre propre quiz, vos questions et réponses, etc.
 // Vous pouvez même modifier entièrement la structure de cette variable si vous le désirez
+
+// Données du quiz — tableau d’objets
 let donnees = [
     {
         question: "Quel animal est connu pour changer de couleur pour se camoufler ? ",
@@ -115,7 +117,7 @@ let donnees = [
     },
     
 ];
-
+// Score et index de la question actuelle
  let score =0;
  let indexQuestion = 0;
 
@@ -124,26 +126,29 @@ let donnees = [
 
 function afficherQuestion(){
     let main= document.getElementById("main");
-    main.textContent ="";
+    main.textContent ="";// Vide le contenu avant d'afficher la nouvelle question
 
     
     if (indexQuestion>=donnees.length){
+        // Fin du quiz
         afficherResultat();
         return;
     }
 
    let questionnaire = donnees[indexQuestion];
-
+   // Création du titre de la question
    let titre = document.createElement("h2");
    titre.textContent = `Question ${indexQuestion + 1}/${donnees.length}`;
    titre.style.marginBottom = "20 px";
    titre.style.fontWeight="bold";
    main.appendChild(titre);
 
+       // Affiche la question
    let paragraphe = document.createElement("p");
    paragraphe.textContent = questionnaire.question;
    paragraphe.style.marginBottom ="20px";
    main.appendChild (paragraphe);
+// Affiche les choix sous forme de liste
 
    let ol = document.createElement("ol");
    for (let i = 0; i<questionnaire.réponses.length;i++){
@@ -154,6 +159,7 @@ function afficherQuestion(){
    };
    main.appendChild(ol);
 
+     // Label pour la saisie de l'utilisateur
    let label = document.createElement("label");
    label.textContent = "Réponse: ";
    label.setAttribute ("for","champReponse");
@@ -171,6 +177,7 @@ function afficherQuestion(){
   let br = document.createElement("br");
   main.appendChild(br);
   
+      // Bouton pour passer à la question suivante
    let bouton = document.createElement("button");
    bouton.textContent ="suivant";
    bouton.style.background ="#E48E36";
@@ -188,11 +195,12 @@ function verifierReponse() {
     let main = document.getElementById("main");
 
     if (champ.value === "") {
+        // Si vide, on passe quand même à la prochaine question
         indexQuestion++;
         afficherQuestion();
         return;
     }
-
+    // Si l'utilisateur tape une valeur non numérique ou hors limites
     if (isNaN(reponseUtilisateur) || reponseUtilisateur < 1 || reponseUtilisateur > donnees[indexQuestion].réponses.length) {
         alert("Veuillez entrer une réponse valide !!!");
         return;
@@ -230,6 +238,7 @@ function afficherResultat(){
     h2.textContent = `Ton score : ${pourcentage}% (${score} / ${donnees.length})`;
     main.appendChild(h2);
 
+      // Affiche une image selon la réussite
     let img = document.createElement("img");
     if (pourcentage >= 60) {
         img.src = "images/valide.png";

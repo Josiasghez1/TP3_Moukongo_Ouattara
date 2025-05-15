@@ -3,7 +3,7 @@ body {
   padding: 0px;
   margin: 0px;
   background-color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif; /* Bonne lisibilité */
 }
 
 div {
@@ -31,59 +31,71 @@ nav {
 ol {
   padding-left: 20px;
 }
+/* Boutons généraux */
 
-button {
+button, .btn {
   background-color: #E48E36;
-  border: none;
-  padding: 10px 20px;
-  color: #F7EED6;
+  color: white;
   font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 8px;
+  padding: 12px 24px;
+   border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.btn {
-  background-color: #E48E36;
-  color: #F7EED6;
-}
-
-.btn:hover {
+button:hover, .btn:hover {
   background-color: #F9D778;
+  color: black;
+  transform: scale(1.05);
 }
 
+/* ===================== ZONE JEU ===================== */
 #zoneJeu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Les cartes s'adaptent */
+  grid-template-columns: repeat(5, 1fr); /* max 5 cartes par ligne */
   gap: 15px; /* Espace entre les cartes */
   padding: 20px;
   justify-items: center; /* Centrer chaque carte */
 }
+/* Appliquer un halo doré aux cartes déjà retournées */
 
-/* Style pour le jeu de mémoire */
-#zoneJeu {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* max 5 cartes par ligne */
-  gap: 15px;
-  padding: 20px;
-  justify-items: center;
+#zoneJeu img[data-cacher="non"] {
+  border: 2px solid #fadb89;
+  box-shadow: 0 0 15px rgba(234, 178, 29, 0.6);
+  transition: box-shadow 0.4s ease;
 }
-
+/* Style des cartes en général */
 #zoneJeu img {
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  cursor: pointer;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s;
+  width: 100%;
+  height: 100%;
+  animation: pop 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+/* Animation d'apparition (zoom) */
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 #zoneJeu img:hover {
-  transform: scale(1.05);
+  transform: scale(1.1) rotateZ(1deg);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Style de la section des paramètres (optionnel pour rendre plus beau) */
+/* ===================== PARAMÈTRES ===================== */
 #parametres {
   padding: 20px;
   background-color: #f9f9f9;
@@ -110,6 +122,7 @@ button {
 #parametres button:hover {
   background-color: #F9D778;
 }
+/* Organisation des éléments de paramètres */
 
 .parametres {
   display: flex;
@@ -130,7 +143,7 @@ button {
   padding: 5px;
   box-sizing: border-box;
 }
-
+/* ===================== ÉLÉMENTS GÉNÉRAUX ===================== */
 .logo {
   width: 100px;
 }
@@ -139,6 +152,7 @@ button {
   font-size: 30px;
   margin: 0px;
 }
+/* ===================== ANIMATIONS DE RÉPONSES ===================== */
 
 @keyframes bonne-reponse {
   0% {
@@ -156,10 +170,14 @@ button {
     background-color: transparent;
   }
 }
+
 .flash-bonne {
   animation: bonne-reponse 0.5s ease;
+  transform: scale(1.1);
 }
+
 
 .flash-mauvaise {
   animation: mauvaise-reponse 0.5s ease;
+  transform: scale(0.95);
 }/*# sourceMappingURL=styles.css.map */
